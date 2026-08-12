@@ -229,6 +229,14 @@ public class Settings {
         unsavedSettingChanges.put(setting, newValue);
     }
 
+    public void set(String path, Object value) {
+        config.set(path, value);
+    }
+
+    public void save() {
+        saveConfigToFile();
+    }
+
     /**
      * Saves all setting to the config, saves the config to the file, and reloads certain classes as necessary.
      *

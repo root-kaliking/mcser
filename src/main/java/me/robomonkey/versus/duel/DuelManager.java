@@ -97,6 +97,11 @@ public class DuelManager {
 
     private void restoreLocation(Player player, PlayerData data, Boolean isWinner) {
         ReturnOption returnOption = isWinner ? Settings.getReturnOption(Setting.RETURN_WINNERS) : Settings.getReturnOption(Setting.RETURN_LOSERS);
+        Arena duelArena = arenaManager.getArena(data.arenaName);
+        if (duelArena != null && duelArena.getLobbyLocation() != null) {
+            player.teleport(duelArena.getLobbyLocation());
+            return;
+        }
         switch (returnOption) {
             case SPAWN:
                 player.teleport(player.getWorld().getSpawnLocation());
@@ -126,6 +131,25 @@ public class DuelManager {
     public void setupDuel(Player playerOne, Player playerTwo) {
         Duel newDuel = createNewDuel(playerOne, playerTwo);
         newDuel.getPlayers().stream().forEach((player) -> dataManager.save(player, newDuel.getArena()));
+        newDuel.getPlayers().forEach(player -> player.addScoreboardTag("versus_dueling"));
+        playerOne.teleport(newDuel.getArena().getSpawnLocationOne());
+        playerTwo.teleport(newDuel.getArena().getSpawnLocationTwo());
+        newDuel.getPlayers().stream().forEach((player) -> {
+            dataManager.update(player, DataManager.DataType.INVENTORY);
+            dataManager.saveDataMap();
+            groomForDuel(player);
+        });
+        populateKits(newDuel);
+        newDuel.startCountdown(() -> commenceDuel(newDuel));
+        if (newDuel.isPublic()) announceDuelStart(newDuel);
+    }
+
+    public void setupDuel(Player playerOne, Player playerTwo, Arena arena) {
+        Duel newDuel = new Duel(arena, playerOne, playerTwo);
+        addDuel(newDuel);
+        arenaManager.registerDuel(arena, newDuel);
+        newDuel.getPlayers().stream().forEach((player) -> dataManager.save(player, newDuel.getArena()));
+        newDuel.getPlayers().forEach(player -> player.addScoreboardTag("versus_dueling"));
         playerOne.teleport(newDuel.getArena().getSpawnLocationOne());
         playerTwo.teleport(newDuel.getArena().getSpawnLocationTwo());
         newDuel.getPlayers().stream().forEach((player) -> {
@@ -187,12 +211,12 @@ public class DuelManager {
         if (currentDuel.getState() == DuelState.COUNTDOWN) {
             undoCountdown(currentDuel);
         }
+        if (currentDuel.isActive()) {
+            registerDuelCompletion(loser, currentDuel);
+        }
         if (fakeDeath) {
             restoreData(loser, false);
             resetAttributes(loser);
-        }
-        if (currentDuel.isActive()) {
-            registerDuelCompletion(loser, currentDuel);
         }
     }
 
@@ -210,7 +234,10 @@ public class DuelManager {
         duel.getPlayers().stream().filter(Player::isOnline).forEach(EffectUtil::stopAllSounds);
         Player loser = duel.getLoser();
         Player winner = duel.getWinner();
-        unregisterFromDuel(loser);
+        duel.getPlayers().forEach(player -> {
+            player.removeScoreboardTag("versus_dueling");
+            unregisterFromDuel(player);
+        });
         if (duel.isPublic()) announceDuelEnd(duel);
         if (winner != null) {
             renderWinEffects(winner, duel);
@@ -298,15 +325,7 @@ public class DuelManager {
         winner.sendTitle(
                 Settings.getMessage(Setting.VICTORY_TITLE_MESSAGE),
                 Settings.getMessage(Setting.VICTORY_SUBTITLE_MESSAGE, Placeholder.of("%player%", PAPIUtil.getName(winner))), 20, 40, 20);
-        if (duel.isVictoryEffectsEnabled()) {
-            Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                extricateWinner(winner, duel);
-                if (duel.isFireworksEnabled())
-                    EffectUtil.spawnFireWorksDelayed(winner.getLocation(), 3, 20, 20L, duel.getFireworkColor());
-            }, Settings.getNumber(Setting.VICTORY_EFFECTS_DURATION) * 20);
-        } else {
-            extricateWinner(winner, duel);
-        }
+        extricateWinner(winner, duel);
     }
 
     private void renderLossEffects(Player loser) {

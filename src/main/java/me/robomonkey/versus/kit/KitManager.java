@@ -48,6 +48,10 @@ public class KitManager {
         kitData.saveKit(kit);
     }
 
+    public void addKit(Kit kit) {
+        kitData.saveKit(kit);
+    }
+
     public boolean contains(String name) {
         return kitData.getKit(name) != null;
     }

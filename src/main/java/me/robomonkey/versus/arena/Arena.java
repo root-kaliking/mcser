@@ -17,6 +17,7 @@ public class Arena {
     private Location spawnLocationTwo;
     private Location centerLocation;
     private Location spectateLocation;
+    private Location lobbyLocation;
     private boolean enabled = false;
     private Kit kit;
 
@@ -60,6 +61,10 @@ public class Arena {
         return spectateLocation;
     }
 
+    public Location getLobbyLocation() {
+        return lobbyLocation;
+    }
+
     public boolean isEnabled() {
         return enabled;
     }
@@ -88,6 +93,9 @@ public class Arena {
                 break;
             case CENTER_LOCATION:
                 centerLocation = value;
+                break;
+            case LOBBY_LOCATION:
+                lobbyLocation = value;
                 break;
         }
         verifySelf();
@@ -118,6 +126,7 @@ public class Arena {
                 spawnLocationTwo,
                 centerLocation,
                 spectateLocation,
+                lobbyLocation,
                 enabled,
                 kit.getName());
     }
@@ -128,9 +137,11 @@ public class Arena {
         newArena.setLocationProperty(ArenaProperty.SPAWN_LOCATION_ONE, jsonArena.spawnLocationOne.toLocation());
         newArena.setLocationProperty(ArenaProperty.SPAWN_LOCATION_TWO, jsonArena.spawnLocationTwo.toLocation());
         newArena.setLocationProperty(ArenaProperty.SPECTATE_LOCATION, jsonArena.spectateLocation.toLocation());
+        if (jsonArena.lobbyLocation != null) {
+            newArena.setLocationProperty(ArenaProperty.LOBBY_LOCATION, jsonArena.lobbyLocation.toLocation());
+        }
         newArena.setKit(KitManager.getInstance().getKit(jsonArena.kit));
         return newArena;
     }
 
 }
-

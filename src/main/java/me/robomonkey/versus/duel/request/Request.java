@@ -9,6 +9,7 @@ public class Request {
     private UUID requested;
     private UUID requesting;
     private Long timecode;
+    private String arenaName;
 
     public Request(UUID requested, UUID requesting) {
         this.requested = requested;
@@ -19,6 +20,12 @@ public class Request {
     public Request(Player requested, Player requesting) {
         this.requested = requested.getUniqueId();
         this.requesting = requesting.getUniqueId();
+    }
+
+    public Request(Player requested, Player requesting, String arenaName) {
+        this.requested = requested.getUniqueId();
+        this.requesting = requesting.getUniqueId();
+        this.arenaName = arenaName;
     }
 
     public Long getTimeSent() {
@@ -63,5 +70,9 @@ public class Request {
 
     public boolean matches(Player requested, Player requesting) {
         return this.requested.equals(requested.getUniqueId()) && this.requesting.equals(requesting.getUniqueId());
+    }
+
+    public String getArenaName() {
+        return arenaName;
     }
 }

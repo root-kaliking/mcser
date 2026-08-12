@@ -15,6 +15,8 @@ public class ArenaData {
     @Expose
     public LocationData spectateLocation;
     @Expose
+    public LocationData lobbyLocation;
+    @Expose
     public boolean enabled;
     @Expose
     public String kit;
@@ -30,6 +32,7 @@ public class ArenaData {
                      Location spawnLocationTwo,
                      Location centerLocation,
                      Location spectateLocation,
+                     Location lobbyLocation,
                      Boolean enabled,
                      String kit) {
         this.name = name;
@@ -37,6 +40,9 @@ public class ArenaData {
         this.spawnLocationTwo = new LocationData(spawnLocationTwo);
         this.centerLocation = new LocationData(centerLocation);
         this.spectateLocation = new LocationData(spectateLocation);
+        if (lobbyLocation != null) {
+            this.lobbyLocation = new LocationData(lobbyLocation);
+        }
         this.enabled = enabled;
         this.kit = kit;
 

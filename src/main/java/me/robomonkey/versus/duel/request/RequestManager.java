@@ -1,5 +1,6 @@
 package me.robomonkey.versus.duel.request;
 
+import me.robomonkey.versus.arena.Arena;
 import me.robomonkey.versus.arena.ArenaManager;
 import me.robomonkey.versus.dependency.PAPIUtil;
 import me.robomonkey.versus.duel.DuelManager;
@@ -137,6 +138,18 @@ public class RequestManager {
         requested.spigot().sendMessage(requestMessage);
     }
 
+    public void sendRequest(Player requesting, Player requested, Arena arena) {
+        requestList.add(new Request(requested, requesting, arena.getName()));
+        String sentRequestMessage = Settings.getMessage(Setting.SENT_REQUEST, new Placeholder("%player%", PAPIUtil.getName(requested)));
+        String requestNotification = Settings.getMessage(Setting.REQUEST_NOTIFICATION, new Placeholder("%player%", PAPIUtil.getName(requesting)));
+
+        requesting.sendMessage(sentRequestMessage);
+        TextComponent requestMessage = getRequestMessage(requested, requesting);
+        requested.sendMessage(requestNotification);
+        EffectUtil.playSound(requested, Sound.ENTITY_EXPERIENCE_ORB_PICKUP);
+        requested.spigot().sendMessage(requestMessage);
+    }
+
     public void acceptRequest(Player requested) throws PlayerOfflineException {
         Request currentRequest = getLatestRequest(requested);
         Player requester = currentRequest.getRequestingPlayer();
@@ -144,6 +157,13 @@ public class RequestManager {
             throw new PlayerOfflineException();
         }
         removeRequest(requested, requester);
+        if (currentRequest.getArenaName() != null) {
+            Arena specifiedArena = ArenaManager.getInstance().getArena(currentRequest.getArenaName());
+            if (specifiedArena != null && specifiedArena.isAvailable()) {
+                DuelManager.getInstance().setupDuel(requester, requested, specifiedArena);
+                return;
+            }
+        }
         if (ArenaManager.getInstance().getAvailableArena() == null) {
             requester.sendMessage(Settings.getMessage(Setting.NO_ARENAS_AVAILABLE));
             requested.sendMessage(Settings.getMessage(Setting.NO_ARENAS_AVAILABLE));
@@ -159,6 +179,13 @@ public class RequestManager {
             throw new PlayerOfflineException();
         }
         removeRequest(requested, requester);
+        if (currentRequest.getArenaName() != null) {
+            Arena specifiedArena = ArenaManager.getInstance().getArena(currentRequest.getArenaName());
+            if (specifiedArena != null && specifiedArena.isAvailable()) {
+                DuelManager.getInstance().setupDuel(requester, requested, specifiedArena);
+                return;
+            }
+        }
         if (ArenaManager.getInstance().getAvailableArena() == null) {
             requester.sendMessage(Settings.getMessage(Setting.NO_ARENAS_AVAILABLE));
             requested.sendMessage(Settings.getMessage(Setting.NO_ARENAS_AVAILABLE));

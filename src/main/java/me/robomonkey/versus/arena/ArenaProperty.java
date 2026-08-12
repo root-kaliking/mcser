@@ -1,12 +1,12 @@
 package me.robomonkey.versus.arena;
 
 public enum ArenaProperty {
-    CENTER_LOCATION("center of the arena"),
-    SPAWN_LOCATION_ONE("first spawn location"),
-    SPAWN_LOCATION_TWO("second spawn location"),
-    SPECTATE_LOCATION("location for spectators"),
-    KIT("kit for players");
-
+    CENTER_LOCATION("竞技场中心点"),
+    SPAWN_LOCATION_ONE("第一个出生点"),
+    SPAWN_LOCATION_TWO("第二个出生点"),
+    SPECTATE_LOCATION("观战点"),
+    KIT("物品包"),
+    LOBBY_LOCATION("大厅复活点");
 
     private String friendlyString;
 
@@ -24,6 +24,8 @@ public enum ArenaProperty {
                 return SPECTATE_LOCATION;
             case SPECTATE_LOCATION:
                 return KIT;
+            case KIT:
+                return LOBBY_LOCATION;
             default:
                 return null;
         }
@@ -32,16 +34,17 @@ public enum ArenaProperty {
     public String getExplanation() {
         switch (this) {
             case CENTER_LOCATION:
-                return "Select the center of the arena, often located in the middle of both duelists.";
+                return "选择竞技场的中心点, 通常位于两个决斗者的中间。";
             case SPAWN_LOCATION_ONE:
-                return "This determines whether the first player in a duel will spawn. ";
+                return "决定决斗中第一个玩家的出生位置。";
             case SPAWN_LOCATION_TWO:
-                return "This determines where the second player in a duel will spawn";
+                return "决定决斗中第二个玩家的出生位置。";
             case SPECTATE_LOCATION:
-                return "This determines where spectators will be teleported to watch a duel, and where the players will be sent after" +
-                        " completing a duel.";
+                return "决定观战者被传送到哪里观看决斗。";
             case KIT:
-                return "This determines the inventory players will have upon entering a duel in this arena.";
+                return "决定玩家进入决斗时拥有的物品包, 将直接读取你当前身上的装备。";
+            case LOBBY_LOCATION:
+                return "决定决斗结束后玩家被传送回的大厅复活点。";
             default:
                 return "";
         }

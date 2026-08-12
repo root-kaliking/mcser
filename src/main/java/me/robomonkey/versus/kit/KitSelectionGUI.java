@@ -24,11 +24,11 @@ public class KitSelectionGUI {
 
     public KitSelectionGUI(Player viewer, BiConsumer<Kit, Player> onSelect) {
         this.viewer = viewer;
-        mainMenu = Versus.spiGUI.create("Kits (Page {currentPage}/{maxPage})", 2);
+        mainMenu = Versus.spiGUI.create("物品包 (第{currentPage}页/共{maxPage}页)", 2);
         mainMenu.setAutomaticPaginationEnabled(true);
         mainMenu.setToolbarBuilder((slot, page, type, sgMenu) -> {
             if (type == SGToolbarButtonType.CURRENT_BUTTON) {
-                ItemStack confirmIcon = new ItemBuilder(Material.LIME_STAINED_GLASS_PANE).amount(1).name("&a&lCONFIRM").lore("&7Confirm your choice of kit.").build();
+                ItemStack confirmIcon = new ItemBuilder(Material.LIME_STAINED_GLASS_PANE).amount(1).name("&a&l确认").lore("&7确认你选择的物品包。").build();
                 SGButton confirmButton = new SGButton(confirmIcon).withListener(listener -> {
                     if (selectedKit == null) selectedKit = KitManager.getInstance().getDefaultKit();
                     onSelect.accept(selectedKit, viewer);
@@ -80,10 +80,10 @@ public class KitSelectionGUI {
         ItemStack displayItem = kit.getDisplayItem();
         ItemStack kitIcon = new ItemBuilder(displayItem.getType())
                 .name(MessageUtil.color("&p" + kit.getName()))
-                .lore(selected ? "&a&lSELECTED" : "&7UNSELECTED",
+                .lore(selected ? "&a&l已选择" : "&7未选择",
                         "",
-                        MessageUtil.color("&pRight-click&s to view."),
-                        MessageUtil.color("&pLeft-Click &sto select &p" + kit.getName() + "&s!"))
+                        MessageUtil.color("&p右键点击&s查看。"),
+                        MessageUtil.color("&p左键点击&s选择 &p" + kit.getName() + "&s!"))
                 .build();
         SGButton kitButton = new SGButton(kitIcon);
         kitButton.withListener(listener);
@@ -91,13 +91,13 @@ public class KitSelectionGUI {
     }
 
     public void openViewingGUI(Kit kit) {
-        SGMenu viewingGUI = Versus.spiGUI.create("Viewing " + kit.getName(), 6);
+        SGMenu viewingGUI = Versus.spiGUI.create("查看 " + kit.getName(), 6);
         IntStream.range(45, 54).forEach(index -> {
             viewingGUI.setButton(index, EMPTY);
         });
         ItemStack exitIcon = new ItemBuilder(Material.BARRIER).amount(1)
-                .name("&c&lExit")
-                .lore("&7Return to viewing all kits.").build();
+                .name("&c&l退出")
+                .lore("&7返回查看所有物品包。").build();
         SGButton exitButton = new SGButton(exitIcon).withListener(inventoryClickEvent -> this.open());
         viewingGUI.setButton(49, exitButton);
         for (int index = 0; index < kit.getItems().length; index++) {

@@ -43,7 +43,7 @@ public class ArenaBuilder {
     }
 
     private void finalizeArena() {
-        builder.sendMessage(MessageUtil.get("&pYou have completed the construction of the &h" + targetArena.getName() + "&p arena!"));
+        builder.sendMessage(MessageUtil.get("&p你已完成 &h" + targetArena.getName() + "&p 竞技场的建设!"));
         EffectUtil.playSound(builder, Sound.ENTITY_CAT_AMBIENT);
         EffectUtil.spawnFireWorks(builder.getLocation(), Settings.getColor(Setting.FIREWORKS_COLOR));
         ArenaManager.getInstance().addArena(targetArena);

@@ -20,10 +20,11 @@ public class RootDuelCommand extends RootCommand {
         setPlayersOnly(true);
         setArgumentRequired(true);
         setUsage("/duel <player>");
-        setDescription("Sends a duel request.");
+        setDescription("向其他玩家发送决斗请求。");
         addBranches(new DenyCommand(),
                 new CancelCommand(),
-                new AcceptCommand());
+                new AcceptCommand(),
+                new GUICommand());
         setAutonomous(true);
         enforcePermissionRulesForChildren();
     }
@@ -35,19 +36,19 @@ public class RootDuelCommand extends RootCommand {
         String playerNameRequested = args[0];
         Player requested = Bukkit.getPlayer(playerNameRequested);
         if (requested == null) {
-            error(sender, "'" + playerNameRequested + "' is not online.");
+            error(sender, "'" + playerNameRequested + "' 不在线。");
             return;
         }
         if (requested.equals(player)) {
-            error(sender, "You cannot duel yourself.");
+            error(sender, "你不能和自己决斗。");
             return;
         }
         if (DuelManager.getInstance().isDueling(player)) {
-            error(sender, "You cannot duel right now.");
+            error(sender, "你现在无法决斗。");
             return;
         }
         if (DuelManager.getInstance().isDueling(requested) || requestManager.isQueued(requested)) {
-            error(sender, requested.getName() + " cannot duel right now.");
+            error(sender, requested.getName() + " 现在无法决斗。");
             return;
         }
         if (requestManager.hasIncomingRequest(player)
@@ -55,16 +56,16 @@ public class RootDuelCommand extends RootCommand {
             try {
                 RequestManager.getInstance().acceptSpecificRequest(player, requested);
             } catch (RequestManager.PlayerOfflineException e) {
-                error(player, "The player that requested a duel is no longer online!");
+                error(player, "发起决斗请求的玩家已下线!");
             }
             return;
         }
         if (requestManager.isQueued(player)) {
-            error(sender, "You cannot send duel requests while queueing for a duel. Type /duel cancel to quit the queue.");
+            error(sender, "你在决斗队列中无法发送决斗请求。输入 /duel cancel 退出队列。");
             return;
         }
         if (requestManager.isRequestedBy(player, requested)) {
-            error(sender, "Please wait for " + requested.getName() + " to respond to your first request.");
+            error(sender, "请等待 " + requested.getName() + " 回复你的第一个请求。");
             return;
         }
         requestManager.sendRequest(player, requested);

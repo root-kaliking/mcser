@@ -79,7 +79,7 @@ public class JsonUtil {
         //TODO: Worry about Async calls
         Gson gson = new Gson();
         Reader reader = new FileReader(file);
-        JsonElement jsonElement = JsonParser.parseReader(reader);
+        JsonElement jsonElement = new JsonParser().parse(reader);
         return jsonElement;
     }
 

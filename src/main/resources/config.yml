@@ -62,22 +62,22 @@ messages-general:
 #|  |  ||  |  ||   __||  |__ | || | | ||  |  |
 #|____/ |_____||_____||_____||_||_|___||_____|
 
-#Options for dueling behavior, messages, and timings.
+#决斗行为、消息和时间设置。
 dueling:
   mechanics:
-    #Sets whether the 'versus.spectate' and 'versus.duel' permissions are required to spectate and duel.
-    #If false, any player will be able to duel.
+    #设置是否需要 'versus.spectate' 和 'versus.duel' 权限才能观战和决斗。
+    #如果为 false, 任何玩家都可以决斗。
     permission_required_to_duel: false
 
-    #Sets where winners return to after a duel.
-    #Options include: 'spectate' , 'spawn' , 'previous', and 'custom'.
-    #Typing anything else will default to 'spawn'.
-    #'spectate' returns winners to the spectator area.
-    #'spawn' returns winners to their spawnpoint.
-    #'previous' returns winners to their previous location.
-    #'custom' returns winners to a custom location, configured in the section below.
+    #设置胜者决斗后返回的位置。
+    #选项包括: 'spectate' , 'spawn' , 'previous', 和 'custom'。
+    #输入其他值将默认为 'spawn'。
+    #'spectate' 返回观战区域。
+    #'spawn' 返回出生点。
+    #'previous' 返回决斗前的位置。
+    #'custom' 返回自定义位置, 在下方配置。
     return_winners: 'spectate'
-    #This setting only takes effect if 'return_winners' is set to 'custom'.
+    #此设置仅在 'return_winners' 设为 'custom' 时生效。
     winner_return_location:
       x: 0
       y: 0
@@ -85,15 +85,15 @@ dueling:
       world: "world"
 
 
-    #Sets where losers return to after a duel.
-    #Options include: 'spectate' , 'spawn' , and 'previous', and 'custom'.
-    #Typing anything else will default to 'spawn'.
-    #'spectate' returns losers to the spectator area.
-    #'spawn' returns losers to their spawnpoint.
-    #'previous' returns losers to their previous location.
-    #'custom' returns winners to a custom location, configured in the section below.
+    #设置败者决斗后返回的位置。
+    #选项包括: 'spectate' , 'spawn' , 'previous', 和 'custom'。
+    #输入其他值将默认为 'spawn'。
+    #'spectate' 返回观战区域。
+    #'spawn' 返回出生点。
+    #'previous' 返回决斗前的位置。
+    #'custom' 返回自定义位置, 在下方配置。
     return_losers: 'spawn'
-    #This setting only takes effect if 'return_losers' is set to 'custom'.
+    #此设置仅在 'return_losers' 设为 'custom' 时生效。
     loser_return_location:
       x: 0
       y: 0
@@ -102,16 +102,16 @@ dueling:
 
 
 
-    #Sets whether players respawn instantly after losing a duel, skipping the respawn screen.
+    #设置玩家在决斗失败后是否立即复活, 跳过重生界面。
     instant_respawn: false
 
-    #enable or disable placing blocks while in a duel.
+    #决斗中是否允许放置方块。
     allow_block_placements: true
-    #enable or disable destroying blocks while in a duel.
+    #决斗中是否允许破坏方块。
     allow_block_destruction: true
-    #Sets the duration of the countdown before a duel.
+    #设置决斗开始前的倒计时时间(秒)。
     countdown_duration: 5
-    #List of the commands that will be blocked during a duel.
+    #决斗期间被禁用的命令列表。
     blocked_commands:
       - 'heal'
       - 'gamemode'
@@ -136,51 +136,51 @@ dueling:
       - 'vault'
       - 'enderchest'
 
-  #Options for potion effects, firework effects activated during a duel.
+  #决斗期间的药水效果、烟花效果选项。
   announcements:
-    #Sets whether duels are announced in global chat.
+    #设置是否在全局聊天中公告决斗。
     announce_duels: false
-    #The text that announces that a duel has started.
-    #Place the text a player clicks to spectate the duel, in between %button% and %button%.
-    duel_start_announcement: "&c%player_one%&6 is dueling &c%player_two%&6! %button%&6&lSpectate here.%button%"
-    #The text that announces that a duel has ended and who won/loss.
-    duel_end_announcement: "&6Congratulate &c%winner%&6! They just won a match against &c%loser%&6!"
+    #公告决斗开始的文本。
+    #在 %button% 和 %button% 之间放置玩家点击观战的文本。
+    duel_start_announcement: "&c%player_one%&6 正在与 &c%player_two%&6 决斗! %button%&6&l点击此处观战.%button%"
+    #公告决斗结束及胜者/败者的文本。
+    duel_end_announcement: "&6恭喜 &c%winner%&6! 他刚刚赢得了与 &c%loser%&6 的比赛!"
   effects:
-    #enable or disable blindness when entering a duel.
+    #启用或禁用进入决斗时的失明效果。
     blindness_effects_enabled: true
-    #enable or disable the effects played after a duel victory.
+    #启用或禁用决斗胜利后播放的效果。
     victory_effects_enabled: true
-    #Sets the duration (in seconds) of the effects played after a duel victory.
+    #设置决斗胜利后效果的持续时间(秒)。
     victory_effects_duration: 10
-    #Enable or disable all firework effects during a duel.
+    #启用或禁用决斗期间的所有烟花效果。
     fireworks_enabled: true
-    #Sets the color for fireworks during a duel. Look at the top of this config file for color options.
+    #设置决斗期间烟花的颜色。请查看此配置文件顶部的颜色选项。
     fireworks_color: "blue"
-  #Options for music played during a duel.
+  #决斗期间播放的音乐选项。
   music:
-    #enable or disable music during a duel.
+    #启用或禁用决斗期间的音乐。
     fight_music_enabled: true
-    #Sets the music that plays during the duel. Look at the top of this config file for music options.
+    #设置决斗期间播放的音乐。请查看此配置文件顶部的音乐选项。
     fight_music: 'disc_far'
-    #enable or disable music playing after a player wins a duel.
+    #启用或禁用玩家赢得决斗后播放的音乐。
     victory_music_enabled: true
     victory_music: 'disc_pigstep'
-  #Options for char messages and titles (on-screen text) displayed during a duel.
+  #决斗期间显示的聊天消息和标题(屏幕文字)选项。
   messages:
-    #The text that appears on a player's screen during the duel countdown.
+    #决斗倒计时期间在玩家屏幕上显示的文字。
     countdown_title: "&7%seconds%"
-    #The chat message sent to each pkayer in chat during the duel countdown.
-    countdown_message: "&6Starting in &e%seconds%&6 seconds"
-    #The text that appears on a player's screen when a duel starts.
-    duel_go_message: "&6&lGO!"
-    #The text that appears on a player's screen after winning a duel.
-    victory_title_message: "&6&lVICTORY"
-    #The subtitle for the text that appears on a player's screen after winning a duel.
+    #决斗倒计时期间发送给每个玩家的聊天消息。
+    countdown_message: "&6&e%seconds%&6 秒后开始"
+    #决斗开始时在玩家屏幕上显示的文字。
+    duel_go_message: "&6&l开始!"
+    #玩家赢得决斗后在屏幕上显示的文字。
+    victory_title_message: "&6&l胜利"
+    #玩家赢得决斗后屏幕上显示的副标题。
     victory_subtitle_message: "%player%"
-    #The chat message a player recieves when respawning after losing a duel.
-    duel_loss_message: "&6Don't worry about it &c%player%."
-    #The chat message sent to a spectator after entering an arena.
-    duel_spectate_message: "&7You are now spectating a duel between &6%player_one% &7and &6%player_two%&7."
+    #玩家决斗失败复活后收到的聊天消息。
+    duel_loss_message: "&6别灰心 &c%player%。"
+    #观战者进入竞技场后收到的聊天消息。
+    duel_spectate_message: "&7你正在观战 &6%player_one% &7和 &6%player_two% &7的决斗。"
 
 
 #  _____  _____  _____  _____  _____  _____  _____  _  _____  _____
@@ -189,28 +189,28 @@ dueling:
 #|__|__||_____||__  _||_____||_____||_____|  |_|  |_||_|___||_____|
 #                 |__|
 
-#Options for duel requesting chat messages and styling.
+#决斗请求的聊天消息和样式选项。
 requesting:
   mechanics:
-    #Sets whether players can request to duel someone by shift-clicking on their player character.
+    #设置玩家是否可以通过shift点击其他玩家角色来发起决斗请求。
     shift_click_requesting_enabled: false
   messages:
-    #The chat message sent to a player after choosing to deny a request to duel.
-    denied_request_confirmation: "&7You denied &c%player%'s&6 duel request&7."
-    #The chat message sent to a player after someone else denies their request to duel.
-    denied_request: "&c%player% &7has denied your &6duel request&7."
-    #The chat message sent to a player after sending a request to duel.
-    sent_request: "&7You just sent a &cduel request&7 to &6%player%."
-    #The chat message sent to a player after recieving a request to duel.
-    request_notification: "&6%player% &7has invited you to a &cduel!"
-    #Sets the styling for the text a player clicks to accept a duel request.
-    accept_button: "&7&l[&a&lACCEPT&7&l]"
-    #Sets the styling for the text a player clicks to deny a duel request.
-    deny_button: "&7&l[&c&lDENY&7&l]"
-    #The chat message sent to a player when no arenas are available.
-    no_arenas_available: "&6You've been placed in a queue. Please wait until an arena is available."
-    #The chat message sent to a player after cancelling a queue to duel.
-    cancel_request: "&6You're no longer queueing for a duel."
+    #玩家拒绝决斗请求后收到的聊天消息。
+    denied_request_confirmation: "&7你拒绝了 &c%player%&6 的决斗请求&7。"
+    #玩家拒绝他人决斗请求后, 对方收到的聊天消息。
+    denied_request: "&c%player% &7拒绝了你的 &6决斗请求&7。"
+    #玩家发送决斗请求后收到的聊天消息。
+    sent_request: "&7你向 &6%player% &7发送了 &c决斗请求&7。"
+    #玩家收到决斗请求时的聊天消息。
+    request_notification: "&6%player% &7邀请你进行 &c决斗!"
+    #玩家点击接受决斗请求的文本样式。
+    accept_button: "&7&l[&a&l接受&7&l]"
+    #玩家点击拒绝决斗请求的文本样式。
+    deny_button: "&7&l[&c&l拒绝&7&l]"
+    #没有可用竞技场时发送给玩家的聊天消息。
+    no_arenas_available: "&6你已被加入队列。请等待有可用的竞技场。"
+    #取消决斗队列后发送给玩家的聊天消息。
+    cancel_request: "&6你已退出决斗队列。"
 
 
 
@@ -219,16 +219,16 @@ requesting:
 #|  |  |   __|   __|   __| | | |  |  |   __| | | |   --|-   -|   __|__   |
 #|____/|_____|__|  |_____|_|___|____/|_____|_|___|_____|_____|_____|_____|
 
-#(OPTIONAL)
-#Options for dependencies and interacting with other plugins or API's.
+#(可选)
+#依赖项和与其他插件或API交互的选项。
 dependencies:
   placeholderAPI:
-    #NOTE: This feature only functions if:
-    #1) Essentials and PlaceholderAPI are both installed.
-    #2) Essentials has been reigstered by PlaceholderAPI by typing /papi ecloud download Essentials.
-    #Otherwise, this feature will be ignored and player names will remain unchanged.
-    #Sets whether essentials nicknames replace player names in Versus chat messages.
+    #注意: 此功能仅在以下条件满足时有效:
+    #1) Essentials 和 PlaceholderAPI 都已安装。
+    #2) Essentials 已通过输入 /papi ecloud download Essentials 注册到 PlaceholderAPI。
+    #否则, 此功能将被忽略, 玩家名称将保持不变。
+    #设置是否用 Essentials 昵称替换 Versus 聊天消息中的玩家名称。
     essentials_nicknames_enabled: true
   itemsadder:
-    #Sets whether custom ItemsAdder items can be saved to kits.
+    #设置是否可以将自定义 ItemsAdder 物品保存到物品包中。
     items_adder_for_kits: true

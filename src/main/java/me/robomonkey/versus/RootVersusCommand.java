@@ -1,6 +1,7 @@
 package me.robomonkey.versus;
 
 import me.robomonkey.versus.command.RootCommand;
+import me.robomonkey.versus.command.SetRespawnCommand;
 import me.robomonkey.versus.settings.command.ConfigCommand;
 import me.robomonkey.versus.settings.command.SupportCommand;
 import org.bukkit.command.CommandSender;
@@ -11,7 +12,7 @@ public class RootVersusCommand extends RootCommand {
 
     public RootVersusCommand() {
         super("versus", "versus.admin");
-        addBranches(new ConfigCommand(), new SupportCommand());
+        addBranches(new ConfigCommand(), new SupportCommand(), new SetRespawnCommand());
         setPermissionRequired(true);
         enforcePermissionForChildren();
         enforcePermissionRulesForChildren();

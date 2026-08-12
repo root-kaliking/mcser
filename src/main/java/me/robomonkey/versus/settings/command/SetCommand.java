@@ -33,8 +33,8 @@ public class SetCommand extends AbstractCommand {
             return;
         }
         Settings.getInstance().changeSetting(setting, converted);
-        sender.sendMessage(MessageUtil.get("&sSuccessfully set &p" + setting + "&s to &b'") + option + MessageUtil.color("' &sin the config file."),
-                MessageUtil.get("&sType &p/versus config save&s to save all changes."));
+        sender.sendMessage(MessageUtil.get("&sSuccessfully set &p" + setting + "&s to &b'") + option + MessageUtil.color("' &sin the config file."));
+        sender.sendMessage(MessageUtil.get("&sType &p/versus config save&s to save all changes."));
     }
 
     @Override
