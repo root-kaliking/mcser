@@ -16,24 +16,24 @@ public class LoadKitCommand extends AbstractCommand {
 
     public LoadKitCommand() {
         super("loadkit", "versus.kit.load");
-        setUsage("/arena loadkit <name>");
-        setDescription("Loads a kit into player inventory.");
+        setUsage("/arena loadkit <名称>");
+        setDescription("将物品包加载到玩家背包中。");
     }
 
     @Override
     public void callCommand(CommandSender sender, String[] args) {
         Player player = (Player) sender;
         if (args.length < 1) {
-            error(sender, "Please specify the kit to load.");
+            error(sender, "请指定要加载的物品包。");
             return;
         }
         String kitName = args[0];
         if (kitManager.contains(kitName)) {
             ItemStack[] contents = kitManager.getKit(kitName).getItems();
             player.getInventory().setContents(contents);
-            sender.sendMessage(MessageUtil.get("&pYou loaded &h" + kitName + "&p."));
+            sender.sendMessage(MessageUtil.get("&p你已加载 &h" + kitName + "&p。"));
         } else {
-            error(sender, "No kit named " + kitName + " exists.");
+            error(sender, "不存在名为 " + kitName + " 的物品包。");
         }
     }
 
