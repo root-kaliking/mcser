@@ -11,16 +11,16 @@ config-version: 1.0
 # \______|\__|  \__|\__|       \______/
 #
 #-----------------------------------------------------------------------------------------------------------------------------
-#                                                  | MUSIC OPTIONS: |
+#                                                  | 音乐选项： |
 #-----------------------------------------------------------------------------------------------------------------------------
 # creative, credits, disc_5, disc_11, disc_13, disc_blocks, disc_cat, disc_chirp, disc_creator,
 # disc_creator_music_box, disc_far, disc_mall, disc_mellohi, disc_otherside, disc_pigstep, disc_precipice, disc_relic,
 # disc_stal, disc_strad, disc_wait, disc_ward
-# WARNING: Certain songs are only available in specific versions!!!
+# 警告：某些歌曲仅在特定版本中可用！！！
 #-----------------------------------------------------------------------------------------------------------------------------
-#                                                  | COLOR OPTIONS: |
+#                                                  | 颜色选项： |
 #-----------------------------------------------------------------------------------------------------------------------------
-# aqua, black, blue, gray, green, lime, orange, purple, red, silver, teal, white, and yellow.
+# aqua, black, blue, gray, green, lime, orange, purple, red, silver, teal, white, 和 yellow。
 
 
 
@@ -32,29 +32,29 @@ config-version: 1.0
 #|  |  ||   __|| | | ||   __||    -||     ||  |__
 #|_____||_____||_|___||_____||__|__||__|__||_____|
 
-#Options for general plugin messages.
+#插件常规消息选项。
 messages-general:
-  #How admin commands and messages will be displayed.
+  #管理员命令和消息的显示方式。
   admin:
-    #Enables or disables the prefix for admin messages.
+    #启用或禁用管理员消息前缀。
     prefix_enabled: false
     prefix: "&7[&6Versus&7] "
-    #Sets the primary color for admin messages
+    #设置管理员消息的主色调。
     primary_color: "&6"
-    #Sets the color for text meant to disappear into the background like confirmation messages.
+    #设置用于融入背景的文字颜色，如确认消息。
     subtle_color: "&7"
-    #Sets the color for text highlighting key terms like player names.
+    #设置用于突出关键文字（如玩家名）的颜色。
     highlighted_color: "&c"
-    #Sets the color for important text, like buttons or headings.
+    #设置重要文字（如按钮或标题）的颜色。
     bold_color: "&6&l"
-    #Sets the styling for line elements in all chat messages.
+    #设置所有聊天消息中线条元素的样式。
     line: "&6&m-------------------------------------"
-  #How errors will be displayed stylistically.
+  #错误消息的样式显示方式。
   errors:
-    #Sets the text and color proceeding error messages in chat.
-    error_prefix: "&cError: &4"
-    no_permission_message: "You do not have access to that command."
-    only_players_message: "Only players can use this command!"
+    #设置聊天中错误消息前显示的文字和颜色。
+    error_prefix: "&c错误: &4"
+    no_permission_message: "你没有权限使用该命令。"
+    only_players_message: "只有玩家才能使用此命令！"
 
 
 #  ____   _____  _____  __     _  _____  _____

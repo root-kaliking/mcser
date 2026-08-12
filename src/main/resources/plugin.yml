@@ -4,15 +4,15 @@ main: me.robomonkey.versus.Versus
 prefix: Versus
 api-version: 1.16
 authors: [ robomonkey ]
-description: Dueling optimized for Semi-Vanilla servers and casual fun.
+description: 为半原版服务器和休闲娱乐优化的决斗系统。
 softdepend: [ PlaceholderAPI, ItemsAdder ]
 
 commands:
   arena:
-    description: Create, edit, and delete dueling arenas.
+    description: 创建、编辑和删除决斗竞技场。
   duel:
-    description: Request to duel with another player.
+    description: 请求与其他玩家决斗。
   spectate:
-    description: Spectate a player in a duel.
+    description: 观战正在决斗的玩家。
   versus:
-    description: Configure Versus.
+    description: 配置 Versus。
